@@ -1,0 +1,22 @@
+.App {
+  border: 1px solid black;
+  padding: 8px;
+  height: 400px;
+}
+
+.message {
+  margin-bottom: 6px;
+}
+
+.send-box {
+  display: flex;
+}
+
+.send-box input {
+  flex: 1;
+  padding: 8px;
+}
+
+.send-box button {
+  padding: 6px 12px;
+}
