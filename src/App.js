@@ -6,19 +6,35 @@ export default function App() {
   const [newMessage, setNewMessage] = React.useState("hello");
 
   React.useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch("http://localhost:3001/posts")
       .then((response) => {
         return response.json();
       })
       .then((posts) => {
-        titles = posts.slice(0, 10).map((post) => post.title);
+        const titles = posts.slice(-10).map((post) => post.title);
         setMessages(titles);
       });
   }, []);
 
   function onSendClick(event) {
-    setMessages([...messages, newMessage]);
-    setNewMessage("");
+    fetch('http://localhost:3001/posts', {
+      method: 'POST',
+      body: JSON.stringify({ title: newMessage }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      return response.json();
+    }).then((createdPost) => {
+      setMessages([...messages, newMessage]);
+      setNewMessage("");
+      // throw new Error('failed!') // error simulation to test .catch below
+    }).catch((error) => {
+      // handle the error somehow.
+      // setError('Failed to post message')
+    });
+    
+
   }
 
   function onNewMessageChange(event) {
@@ -28,8 +44,8 @@ export default function App() {
   return (
     <>
       <div className="App">
-        {messages.map((message) => (
-          <div className="message">{message}</div>
+        {messages.map((message, index) => (
+          <div className="message" key={index}>{message}</div>
         ))}
       </div>
       <div className="send-box">
@@ -38,6 +54,7 @@ export default function App() {
           Send
         </button>
       </div>
+      {/* {error && <div>{error}</div>} */}
     </>
   );
 }
