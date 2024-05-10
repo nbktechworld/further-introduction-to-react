@@ -6,6 +6,10 @@ Video: <https://www.youtube.com/watch?v=kNk_ycw5uM8>
 
 Video: <https://www.youtube.com/watch?v=N9Xg9zu5v4I>
 
+## Integrating PostgreSQL Database with pgAdmin
+
+Video: <https://www.youtube.com/watch?v=CmxQ-R7YgJg>
+
 ## How to Run
 
 Copy `.env.example` to a new file `.env`. Then fill in the values for each variable.
